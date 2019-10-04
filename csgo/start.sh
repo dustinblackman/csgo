@@ -16,13 +16,13 @@ export IP="${IP:-0.0.0.0}"
 
 cd $CSGO_DIR
 
-cat << SERVERCFG > ./cfg/server.cfg
+tee -a "$CSGO_DIR/csgo/cfg/server.cfg" << END
 hostname "$SERVER_HOSTNAME"
 rcon_password "$RCON_PASSWORD"
 sv_password "$SERVER_PASSWORD"
 sv_lan 0
 sv_cheats 0
-SERVERCFG
+END
 
 ./srcds_run \
     -console \
