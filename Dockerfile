@@ -14,12 +14,18 @@ RUN mkdir /steamcmd && \
     tar -zxvf steamcmd_linux.tar.gz && \
     rm steamcmd_linux.tar.gz
 
-RUN mkdir -p /root/.steam/sdk32 && \
-    ln -s /steamcmd/linux32/steamclient.so /root/.steam/sdk32/steamclient.so
-
 WORKDIR /csgo
+
+RUN groupadd -r csgo && useradd --no-log-init -r -g csgo csgo && \
+    mkdir -p /home/csgo && \
+    chown -R csgo:csgo /csgo /steamcmd /home/csgo
+USER csgo
+
+RUN mkdir -p /home/csgo/.steam/sdk32 && \
+    ln -s /steamcmd/linux32/steamclient.so /home/csgo/.steam/sdk32/steamclient.so
+
 RUN /steamcmd/steamcmd.sh +login anonymous +force_install_dir /csgo +app_update 740 +quit
-COPY ./csgo .
+COPY --chown=csgo:csgo ./csgo .
 
 EXPOSE 27015/udp
 
