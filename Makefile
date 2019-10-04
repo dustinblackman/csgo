@@ -12,4 +12,5 @@ update: update-version
 	git add version
 	git commit -m "Update to $$(cat version)"
 	git tag -a "$$(cat version)" -m "Updated to version $$(cat version). https://steamdb.info/app/740/history/"
+	git push
 	git push origin --tags
