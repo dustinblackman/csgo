@@ -2,7 +2,12 @@
 SHELL := /bin/bash
 
 build:
-	@docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
+	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
+
+docker:
+	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
+	docker push dustinblackman/csgo:latest
+	docker push "dustinblackman/csgo:$$(cat version)"
 
 update-version:
 	@rm -f version
