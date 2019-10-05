@@ -17,7 +17,7 @@ docker:
 
 docker-ci:
 	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
-	set -o pipefail; docker push dustinblackman/csgo:latest | while read i; do echo $$SECONDS $$i; done | awk '{if(t[$$2]==0)t[$$2]=$$1;$$1=$$1-t[$$2];print}'
+	@docker push dustinblackman/csgo:latest & PID=$$!; while [ -d "/proc/$$PID" ]; do echo "." && sleep 5; done;
 	docker push "dustinblackman/csgo:$$(cat version)"
 
 update:
