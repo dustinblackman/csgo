@@ -10,8 +10,8 @@ export TICKRATE="${TICKRATE:-128}"
 export GAME_TYPE="${GAME_TYPE:-0}"
 export GAME_MODE="${GAME_MODE:-1}"
 export MAP="${MAP:-de_dust2}"
-export MAPGROUP="${MAPGROUP:-mg_active}"
-export MAXPLAYERS="${MAXPLAYERS:-12}"
+export MAP_GROUP="${MAPGROUP:-mg_active}"
+export MAX_PLAYERS="${MAXPLAYERS:-12}"
 export IP="${IP:-0.0.0.0}"
 
 cd $CSGO_DIR
@@ -30,10 +30,10 @@ END
     -game csgo \
     -tickrate $TICKRATE \
     -port $PORT \
-    -maxplayers_override $MAXPLAYERS \
+    -maxplayers_override $MAX_PLAYERS \
     +game_type $GAME_TYPE \
     +game_mode $GAME_MODE \
-    +mapgroup $MAPGROUP \
+    +mapgroup $MAP_GROUP \
     +map $MAP \
     +ip $IP \
     +sv_setsteamaccount $STEAM_ACCOUNT
