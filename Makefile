@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := update
+.DEFAULT_GOAL := build
 SHELL := /bin/bash
 
 build:
