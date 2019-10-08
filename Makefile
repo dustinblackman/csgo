@@ -8,7 +8,7 @@ commit-update: update
 	git add version
 	git commit -m "Update to $$(cat version)"
 	git tag -a "$$(cat version)" -m "Updated to version $$(cat version). https://steamdb.info/app/740/history/"
-	git push --follow-tags
+	git push --follow-tags --set-upstream origin "$$(git symbolic-ref --short HEAD)"
 
 docker:
 	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
