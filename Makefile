@@ -11,12 +11,12 @@ commit-update: update
 	git push --follow-tags --set-upstream origin "$$(git symbolic-ref --short HEAD)"
 
 docker:
-	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" .
+	docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" . 
 	docker push dustinblackman/csgo:latest
 	docker push "dustinblackman/csgo:$$(cat version)"
 
 docker-ci:
-	@docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" . & PID=$$!; while [ -d "/proc/$$PID" ]; do echo "." && sleep 300; done;
+	(docker build -t dustinblackman/csgo:latest -t "dustinblackman/csgo:$$(cat version)" . & PID=$$!; while [ -d "/proc/$$PID" ]; do echo "." && sleep 300; done) | while read line; do echo "$$(date)| $$line"; done;
 	@docker push dustinblackman/csgo:latest & PID=$$!; while [ -d "/proc/$$PID" ]; do echo "." && sleep 5; done;
 	docker push "dustinblackman/csgo:$$(cat version)"
 
