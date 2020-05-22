@@ -22,4 +22,7 @@ docker-ci:
 
 update:
 	@rm -f version
-	@curl -L -s -H 'Referer: https://steamdb.info/app/740/history/' 'https://steamdb.info/api/GetAppHistory/?lastentry=0&appid=740' | jq -r -c .data.Rendered | grep 'Changelist' | head -n 1 | awk -F'[#<]' '{print $$3}' > version
+	@curl -L -s \
+		-H 'Referer: https://steamdb.info/app/740/history/' \
+		-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0' \
+		'https://steamdb.info/api/GetAppHistory/?lastentry=0&appid=740' | jq -r -c .data.Rendered | grep 'Changelist' | head -n 1 | awk -F'[#<]' '{print $$3}' > version
